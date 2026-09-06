@@ -2,13 +2,14 @@ import psutil as p
 import mysql.connector
 from rich import print
 import speedtest
+from datetime import datetime
 
 
 conexao = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="@Timao123",
-    database="computador"
+    password="pedro2302",
+    database="SorveSys"
 )
 
 cursor = conexao.cursor()
@@ -19,10 +20,10 @@ if conexao.is_connected():
 def usuario(): 
     while True:
         recurso = input("Digite qual recurso você quer \n"
-        "1- CPU \n" \
-        "2- Memória \n" \
-        "3- Disco \n" \
-        "4- Qualidade da internet\n" \
+        "1- CPU \n"
+        "2- Memória \n"
+        "3- Disco \n"
+        "4- Qualidade da internet\n"
         "5- Sair\n"
         )
         if recurso.lower() == "cpu" or recurso == "1":
@@ -48,10 +49,10 @@ def cpu():
     while True:
 
         cpuInfo = input(
-            "Digite o que você quer saber da CPU \n" \
-            "1- CPU Times \n" \
-            "2- Uso da CPU \n" \
-            "3- CPUs lógicas \n" \
+            "Digite o que você quer saber da CPU \n"
+            "1- CPU Times \n"
+            "2- Uso da CPU \n"
+            "3- CPUs lógicas \n"
             "4- sair\n"
         )
 
@@ -64,12 +65,12 @@ def cpu():
             print(times)
 
             sql = """
-                INSERT INTO cpu
-                (CPUTimes, UsoDaCPU, CPUslogicas)
-                VALUES (%s, %s, %s)
+                INSERT INTO leitura 
+                (valor, data_hora, configuracao_maquina_fk, configuracao_componente_fk, configuracao_status_monitor_fk, metrica_fk)
+                VALUES (%s, NOW(), 1, 1, 1, 1)
             """
 
-            valores = (times.user + times.system, uso_cpu, cpus_logicas)
+            valores = (times.user + times.system,)
             cursor.execute(sql, valores)
             conexao.commit()
 
@@ -82,12 +83,12 @@ def cpu():
             print(f"[bold blue] CPU = {uso_cpu}% [/bold blue]")
 
             sql = """
-                INSERT INTO cpu
-                (CPUTimes, UsoDaCPU, CPUslogicas)
-                VALUES (%s, %s, %s)
+                INSERT INTO leitura 
+                (valor, data_hora, configuracao_maquina_fk, configuracao_componente_fk, configuracao_status_monitor_fk, metrica_fk)
+                VALUES (%s, NOW(), 1, 1, 1, 1)
             """
 
-            valores = (times.user + times.system, uso_cpu,cpus_logicas)
+            valores = (uso_cpu,)
             cursor.execute(sql, valores)
             conexao.commit()
 
@@ -100,12 +101,12 @@ def cpu():
             print(f"[bold blue] CPUs Lógicas = {cpus_logicas} [/bold blue]")
 
             sql = """
-                INSERT INTO cpu
-                (CPUTimes, UsoDaCPU, CPUslogicas)
-                VALUES (%s, %s, %s)
+                INSERT INTO leitura 
+                (valor, data_hora, configuracao_maquina_fk, configuracao_componente_fk, configuracao_status_monitor_fk, metrica_fk)
+                VALUES (%s, NOW(), 1, 1, 1, 1)
             """
 
-            valores = (times.user + times.system, uso_cpu, cpus_logicas)
+            valores = (cpus_logicas,)
 
             cursor.execute(sql, valores)
             conexao.commit()
@@ -121,11 +122,11 @@ def disco():
 
     while True:
 
-        discoInfo = input("Qual informação do disco você quer acessar \n" \
-        "1- Disco Total \n" \
-        "2- Disco Usado \n" \
+        discoInfo = input("Qual informação do disco você quer acessar \n"
+        "1- Disco Total \n"
+        "2- Disco Usado \n"
         "3- Disco Livre \n"
-        "4- Uso do disco \n" \
+        "4- Uso do disco \n"
         " 5- sair \n")
 
         if discoInfo.lower() == "sair" or discoInfo == "5":
@@ -145,23 +146,27 @@ def disco():
 
             if discoInfo.lower() == "disco total" or discoInfo == "1":
                 print(f"[bold blue]Disco Total = {disco_total:.2f} GB [/bold blue]")
+                valor_inserir = disco_total
 
             elif discoInfo.lower() == "disco usado" or discoInfo == "2":
                 print(f"[bold blue]Disco Usado = {disco_usado:.2f} GB [/bold blue]")
+                valor_inserir = disco_usado
 
             elif discoInfo.lower() == "disco livre" or discoInfo == "3":
                 print(f"[bold blue]Disco Livre = {disco_livre:.2f} GB [/bold blue]")
+                valor_inserir = disco_livre
 
-            elif discoInfo.lower() == "uso do disco"or discoInfo == "4":
+            elif discoInfo.lower() == "uso do disco" or discoInfo == "4":
                 print(f"[bold blue]Uso do Disco = {uso_disco}%[/bold blue]")
+                valor_inserir = uso_disco
 
             sql = """
-                INSERT INTO disco
-                (DiscoTotal, DiscoUsado, DiscoLivre, UsoDoDisco)
-                VALUES (%s, %s, %s, %s)
+                INSERT INTO leitura 
+                (valor, data_hora, configuracao_maquina_fk, configuracao_componente_fk, configuracao_status_monitor_fk, metrica_fk)
+                VALUES (%s, NOW(), 1, 3, 1, 2)
             """
 
-            valores = ( disco_total, disco_usado, disco_livre, uso_disco)
+            valores = (valor_inserir,)
 
             cursor.execute(sql, valores)
             conexao.commit()
@@ -174,12 +179,12 @@ def memo():
 
     while True:
 
-        memoriaInfo = input("Qual informação da memória você quer acessar \n" \
-        "1- RAM Total \n" \
-        "2- RAM Disponível \n" \
-        "3- RAM Usada \n" \
-        "4- RAM Livre \n" \
-        "5- Uso da RAM \n" \
+        memoriaInfo = input("Qual informação da memória você quer acessar \n"
+        "1- RAM Total \n"
+        "2- RAM Disponível \n"
+        "3- RAM Usada \n"
+        "4- RAM Livre \n"
+        "5- Uso da RAM \n"
         "6- sair\n")
 
         if memoriaInfo.lower() == "sair" or memoriaInfo == "6":
@@ -202,29 +207,34 @@ def memo():
 
             if memoriaInfo.lower() == "ram total" or memoriaInfo == "1":
                 print(f"[bold blue]RAM Total = {memoria_total:.2f} GB[/bold blue]")
+                valor_inserir = memoria_total
 
             elif (
                 memoriaInfo.lower() == "ram disponivel"
                 or memoriaInfo.lower() == "ram disponível" or memoriaInfo == "2"
             ):
                 print(f"[bold blue]RAM Disponível = {ram_disponivel:.2f} GB[/bold blue]")
+                valor_inserir = ram_disponivel
 
             elif memoriaInfo.lower() == "ram usada" or memoriaInfo == "3":
                 print(f"[bold blue]RAM Usada = {ram_usada:.2f} GB[/bold blue]")
+                valor_inserir = ram_usada
 
             elif memoriaInfo.lower() == "ram livre" or memoriaInfo == "4":
                 print(f"[bold blue]RAM Livre = {memoria_livre:.2f} GB[/bold blue]")
+                valor_inserir = memoria_livre
 
             elif memoriaInfo.lower() == "uso da ram" or memoriaInfo == "5":
                 print(f"[bold blue]Uso da RAM = {uso_ram}%[/bold blue]")
+                valor_inserir = uso_ram
 
             sql = """
-                INSERT INTO memoria
-                (ramTotal, ramDisponivel, ramUsada, memoriaLivre, UsoDaRam)
-                VALUES (%s, %s, %s, %s, %s)
+                INSERT INTO leitura 
+                (valor, data_hora, configuracao_maquina_fk, configuracao_componente_fk, configuracao_status_monitor_fk, metrica_fk)
+                VALUES (%s, NOW(), 1, 2, 1, 2)
             """
 
-            valores = (memoria_total,ram_disponivel,ram_usada,memoria_livre,uso_ram)
+            valores = (valor_inserir,)
 
             cursor.execute(sql, valores)
             conexao.commit()
@@ -235,23 +245,18 @@ def memo():
 def internet():
     print("Iniciando o teste de velocidade... Aguarde um momento.")
 
-# Cria o objeto do Speedtest
     st = speedtest.Speedtest()
-
-    # Encontra o melhor servidor com base na menor latência (ping)
     st.get_best_server()
 
     print("Testando o Ping...")
     ping = st.results.ping
 
     print("Testando a velocidade de Download...")
-    # O resultado vem em bits por segundo, dividimos por 10^6 para converter para Mbps
     download_speed = st.download() / 1_000_000
 
     print("Testando a velocidade de Upload...")
     upload_speed = st.upload() / 1_000_000
 
-    # Exibe os resultados formatados com duas casas decimais
     print(f"")
     print(f"[bold green]Ping: {ping:.2f} ms[/bold green]")
     print(f"[bold green]Download: {download_speed:.2f} Mbps[/bold green]")
@@ -259,143 +264,120 @@ def internet():
     print(f"")
 
     sql = """
-        INSERT INTO internet
-        (ping, download, upload)
-        VALUES (%s, %s, %s)
-            """
+        INSERT INTO leitura 
+        (valor, data_hora, configuracao_maquina_fk, configuracao_componente_fk, configuracao_status_monitor_fk, metrica_fk)
+        VALUES (%s, NOW(), 1, 4, 1, 3)
+    """
 
-    valores = (ping, download_speed, upload_speed)
+    valores = (download_speed,)
 
     cursor.execute(sql, valores)
     conexao.commit()
 
 
 def banco():
-    bank = input("Qual dado do banco você quer \n" \
-    "1-CPU \n" \
-    "2- Memória \n" \
-    "3- Disco \n" \
-    "4- Internet \n" \
+    bank = input("Qual dado do banco você quer \n"
+    "1- CPU \n"
+    "2- Memória \n"
+    "3- Disco \n"
+    "4- Internet \n"
     "5- sair\n")
     if bank.lower() == "cpu" or bank == "1":
-        cursor.execute("SELECT * FROM cpu")
+        cursor.execute("SELECT id, valor, data_hora FROM leitura WHERE configuracao_componente_fk = 1")
         resultados = cursor.fetchall()
 
         for produto in resultados:
             print(f"\nID: {produto[0]}")
-            print(f"CPU Times: {produto[1]}")
-            print(f"Uso da CPU: {produto[2]}%")
-            print(f"CPUs Lógicas: {produto[3]}")
+            print(f"Valor registrado: {produto[1]}")
+            print(f"Data/Hora: {produto[2]}")
 
-    elif bank.lower() == "memoria" or bank.lower == "memória" or bank == "2":
-        cursor.execute("SELECT * FROM memoria")
+    elif bank.lower() == "memoria" or bank.lower() == "memória" or bank == "2":
+        cursor.execute("SELECT id, valor, data_hora FROM leitura WHERE configuracao_componente_fk = 2")
         resultados = cursor.fetchall()
 
         for produto in resultados:
             print(f"\nID: {produto[0]}")
-            print(f"RAM total: {produto[1]}")
-            print(f"RAM disponível: {produto[2]}")
-            print(f"RAM usada: {produto[3]}")
-            print(f"Memória livre: {produto[4]}")
-            print(f"Uso da RAM: {produto[5]}")
-            print(f"")  
+            print(f"Valor registrado: {produto[1]}")
+            print(f"Data/Hora: {produto[2]}")
 
     elif bank.lower() == "disco" or bank == "3":
-        cursor.execute("SELECT * FROM memoria")
+        cursor.execute("SELECT id, valor, data_hora FROM leitura WHERE configuracao_componente_fk = 3")
         resultados = cursor.fetchall()
 
         for produto in resultados:
             print(f"\nID: {produto[0]}")
-            print(f"Disco total: {produto[1]}")
-            print(f"Disco usado: {produto[2]}")
-            print(f"Disco livre: {produto[3]}")
-            print(f"Uso do disco: {produto[4]}")
-            print(f"")   
+            print(f"Valor registrado: {produto[1]}")
+            print(f"Data/Hora: {produto[2]}")
 
     elif bank.lower() == "internet" or bank == "4":
-            cursor.execute("SELECT * FROM internet")
+            cursor.execute("SELECT id, valor, data_hora FROM leitura WHERE configuracao_componente_fk = 4")
             resultados = cursor.fetchall()
-    
+
             for produto in resultados:
                 print(f"\nID: {produto[0]}")
-                print(f"Ping: {produto[1]}")
-                print(f"Download: {produto[2]}")
-                print(f"Upload: {produto[3]}")
-                print(f"")  
+                print(f"Valor registrado: {produto[1]}")
+                print(f"Data/Hora: {produto[2]}")
 
     elif bank.lower() == "sair" or bank == "5":
         return
     else:
         banco()
+
 def deletar():
-    delt = input("Qual registro você quer apagar? \n " \
-    "1- CPU \n " \
-    "2- Memória \n" \
-    "3- Disco \n" \
+    delt = input("Qual registro você quer apagar? \n "
+    "1- CPU \n "
+    "2- Memória \n"
+    "3- Disco \n"
     "4- sair\n")
 
     if delt.lower() == "memoria" or delt.lower() == "memória " or delt == "2":
-        cursor.execute("Delete from memoria " \
-        "order by id desc " \
-        "limit 5;")
+        cursor.execute("DELETE FROM leitura WHERE configuracao_componente_fk = 2 ORDER BY id DESC LIMIT 5;")
         conexao.commit()
-        
+
         print("[bold green]Registros apagados com sucesso![/bold green]")
-        cursor.execute("SELECT * FROM memoria")
+        cursor.execute("SELECT * FROM leitura WHERE configuracao_componente_fk = 2")
         resultados = cursor.fetchall()
         for registro in resultados:
             print(registro)    
 
-               
+
     elif delt.lower() == "cpu" or delt == "1":
-        cursor.execute("Delete from cpu " \
-        "order by id desc " \
-        "limit 5;")
+        cursor.execute("DELETE FROM leitura WHERE configuracao_componente_fk = 1 ORDER BY id DESC LIMIT 5;")
         conexao.commit()
-        
+
         print("[bold green]Registros apagados com sucesso![/bold green]")
 
-        cursor.execute("SELECT * FROM cpu")
+        cursor.execute("SELECT * FROM leitura WHERE configuracao_componente_fk = 1")
         resultados = cursor.fetchall()
         for registro in resultados:
             print(registro)       
 
     elif delt.lower() == "disco" or delt == "3":
-        cursor.execute("Delete from disco " \
-        "order by id desc " \
-        "limit 5;")
+        cursor.execute("DELETE FROM leitura WHERE configuracao_componente_fk = 3 ORDER BY id DESC LIMIT 5;")
         conexao.commit()
-        
+
         print("Registros apagados com sucesso!")   
-        cursor.execute("SELECT * FROM disco")
+        cursor.execute("SELECT * FROM leitura WHERE configuracao_componente_fk = 3")
         resultados = cursor.fetchall()
         for registro in resultados:
             print(registro) 
-    
+
     elif delt.lower() == "sair" or delt == "4":
         return
-    
+
     deletar()
 
 def atualizar():
-    atual = input("Qual registro você quer atualizar? \n" \
-    "1- CPU \n" \
-    "2- Memória \n" \
-    "3- Disco \n" \
+    atual = input("Qual registro você quer atualizar? \n"
+    "1- CPU \n"
+    "2- Memória \n"
+    "3- Disco \n"
     "4- sair \n")
 
     if atual.lower() == "memoria" or atual.lower() == "memória " or atual == "1":
-        cursor.execute("Update memoria " \
-        "set data = curdate() " \
-        "where id in (" \
-        "select id " \
-        "from(" \
-        "select id " \
-        "from memoria " \
-        "order by id desc " \
-        "limit 3 ) AS ultimos);")
+        cursor.execute("UPDATE leitura SET data_hora = NOW() WHERE id IN (SELECT id FROM (SELECT id FROM leitura WHERE configuracao_componente_fk = 2 ORDER BY id DESC LIMIT 3) AS ultimos);")
         conexao.commit()
-        cursor.execute("SELECT * FROM memoria")
+        cursor.execute("SELECT * FROM leitura WHERE configuracao_componente_fk = 2")
         resultados = cursor.fetchall()
         for registro in resultados:
             print(registro)
@@ -403,53 +385,38 @@ def atualizar():
         print("[bold green]Registros atualizados com sucesso![/bold green]")
 
     elif atual.lower() == "cpu" or atual == "2":
-        cursor.execute("Update cpu " \
-        "set data = curdate() " \
-        "where id in (" \
-        "select id " \
-        "from(" \
-        "select id " \
-        "from cpu " \
-        "order by id desc " \
-        "limit 3 ) AS ultimos);")
+        cursor.execute("UPDATE leitura SET data_hora = NOW() WHERE id IN (SELECT id FROM (SELECT id FROM leitura WHERE configuracao_componente_fk = 1 ORDER BY id DESC LIMIT 3) AS ultimos);")
         conexao.commit()
-        
-        print("[bold green]Registros atualizados com sucesso![bold green]")
-        cursor.execute("SELECT * FROM cpu")
+
+        print("[bold green]Registros atualizados com sucesso![/bold green]")
+        cursor.execute("SELECT * FROM leitura WHERE configuracao_componente_fk = 1")
         resultados = cursor.fetchall()
         for registro in resultados:
             print(registro)
 
     elif atual.lower() == "disco" or atual == "3":
-        cursor.execute("Update disco " \
-        "set data = curdate() " \
-        "where id in (" \
-        "select id " \
-        "from(" \
-        "select id " \
-        "from disco " \
-        "order by id desc " \
-        "limit 3 ) AS ultimos);")
+        cursor.execute("UPDATE leitura SET data_hora = NOW() WHERE id IN (SELECT id FROM (SELECT id FROM leitura WHERE configuracao_componente_fk = 3 ORDER BY id DESC LIMIT 3) AS ultimos);")
         conexao.commit()
-        print("[bold green]Registros atualizados com sucesso![bold green]")   
+        print("[bold green]Registros atualizados com sucesso![/bold green]")   
 
-        cursor.execute("SELECT * FROM disco")
+        cursor.execute("SELECT * FROM leitura WHERE configuracao_componente_fk = 3")
         resultados = cursor.fetchall()
         for registro in resultados:
             print(registro)
 
-    
+
     elif atual.lower() == "sair" or atual == "4":
         return    
     atualizar()
+
 def decisao():
     while True:
         dec = input(
             "Quais dados você quer \n"
-            "1- Informações do PC \n" \
-            "2- Banco de Dados \n" \
-            "3- Deletar Registros \n" \
-            "4- Atualizar Registros \n" \
+            "1- Informações do PC \n"
+            "2- Banco de Dados \n"
+            "3- Deletar Registros \n"
+            "4- Atualizar Registros \n"
             "5- sair\n" 
         )
 
@@ -469,7 +436,7 @@ def decisao():
             "deleta resgistro",
             "3"
         ]:
-           deletar() 
+            deletar() 
         elif dec.lower() in [
             "atualiza registro",
             "atualizar registros",
@@ -478,13 +445,13 @@ def decisao():
             "4"
         ]:
             atualizar()
-            
+
         elif dec.lower() == "sair" or dec == "5":
-            print("[bold yellow] Programa encerrado![/bold yellow]")
+            print(" Programa encerrado!")
             break
 
         else:
-            print("[bold red]Opção inválida![/bold red]")
+            print("Opção inválida!")
 
 
 decisao()
