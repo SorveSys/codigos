@@ -1,5 +1,5 @@
 # Script de captura de dados de componentes de hardware
-
+import socket
 import os
 import sys
 import time
@@ -20,34 +20,41 @@ conexao = mysql.connector.connect(
     database=os.getenv("DB_NAME"),
 )
 
-# Lê e valida o ID do servidor
-id_servidor = os.getenv("ID_SERVIDOR")
-
-if id_servidor is None:
-    print("ID_SERVIDOR não configurado no .env")
-    conexao.close()
-    sys.exit(1)
-
-try:
-    id_servidor = int(id_servidor)
-except ValueError:
-    print("ID_SERVIDOR deve ser um número inteiro.")
-    conexao.close()
-    sys.exit(1)
-
 cursor = conexao.cursor()
 
 if conexao.is_connected():
     print("\nConexão com o banco de dados bem-sucedida!")
 
 
-def confirmar_servidor(id_servidor):
-    # Verifica se o servidor existe no banco
-    sql = "SELECT id FROM servidor WHERE id = %s"
-    cursor.execute(sql, (id_servidor,))
-    resultado = cursor.fetchone()
+def buscar_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # ponto de comunicação de rede
+    # AF_INET: Ipv4 - SOCK_DGRAM: usa protocolo UDP 
+    try:
+        s.connect(("8.8.8.8", 80))  # UDP: não envia nada de verdade
+        # destino: "8.8.8.8" - porta: 80
+        ip = s.getsockname()[0]
+        return ip
+    except OSError: # se não conseguir obter o ip retorna none
+        return None
+    finally:
+        s.close() # fecha a conexão socket
 
-    return resultado is not None
+
+def confirmar_servidor(ip):
+    # Verifica se o servidor existe no banco
+    sql = "SELECT id FROM servidor WHERE ip = %s"
+    cursor.execute(sql, (ip,))
+
+    resultados = cursor.fetchall()
+
+    if len(resultados) == 0:
+        return None
+    
+    if len(resultados) > 1:
+        print("Mais de um servidor cadastrado com esse IP.")
+        return None
+
+    return resultados[0][0]
 
 
 def capturar_temperatura():
@@ -285,9 +292,21 @@ def inserir_dados(id_servidor, dados):
 
 # Confere uma única vez se o servidor existe no banco
 try:
-    if not confirmar_servidor(id_servidor):
-        print("Servidor não encontrado no banco.")
+
+    ip = buscar_ip()
+
+    if ip is None:
+
+        print("Servidor não encontrado pelo I.P")
         sys.exit(1)
+
+    id_servidor = confirmar_servidor(ip)
+
+    if id_servidor is None:
+        print(f"Nenhum servidor encontrado no banco com o IP {ip}.")
+        sys.exit(1)
+
+    print(f"IP da máquina: {ip} | ID do servidor: {id_servidor}")
 
     while True:
         try:
