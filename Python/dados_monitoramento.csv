@@ -1,0 +1,76 @@
+dt_hora,id_servidor,tipo_servidor,id_empresa,empresa,componente,metrica,valor,alerta
+2026-10-23 10:00:00,1,transito,1,AquaTech Solutions,CPU,Temperatura (Celsius),45.50,
+2026-10-23 10:00:00,1,transito,1,AquaTech Solutions,CPU,Porcentagem de Uso (%),45.50,
+2026-10-23 10:00:00,1,transito,1,AquaTech Solutions,Disco Rigido,Espaco disponivel (%),45.00,
+2026-10-23 10:00:00,1,transito,1,AquaTech Solutions,Disco Rigido,Espaco em uso (%),55.00,
+2026-10-23 10:00:00,1,transito,1,AquaTech Solutions,Memoria RAM,Uso da Memoria (%),68.00,
+2026-10-23 10:01:00,2,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco disponivel (%),7.00,Critico
+2026-10-23 10:01:00,2,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco em uso (%),93.00,Critico
+2026-10-23 10:01:00,2,pagamento,1,AquaTech Solutions,Memoria RAM,Uso da Memoria (%),94.00,Critico
+2026-10-23 10:01:00,2,pagamento,1,AquaTech Solutions,CPU,Temperatura (Celsius),92.00,Critico
+2026-10-23 10:01:00,2,pagamento,1,AquaTech Solutions,CPU,Porcentagem de Uso (%),92.00,Critico
+2026-10-23 10:02:00,3,auditoria,2,SorveSys Monitoramento,Disco Rigido,Espaco em uso (%),80.00,Moderado
+2026-10-23 10:02:00,3,auditoria,2,SorveSys Monitoramento,CPU,Porcentagem de Uso (%),78.00,Moderado
+2026-10-23 10:02:00,3,auditoria,2,SorveSys Monitoramento,CPU,Temperatura (Celsius),78.00,Moderado
+2026-10-23 10:02:00,3,auditoria,2,SorveSys Monitoramento,Memoria RAM,Uso da Memoria (%),82.00,Moderado
+2026-10-23 10:02:00,3,auditoria,2,SorveSys Monitoramento,Disco Rigido,Espaco disponivel (%),20.00,Moderado
+2026-10-26 20:34:53,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco disponivel (%),62.70,
+2026-10-26 20:34:53,7,pagamento,1,AquaTech Solutions,Memoria RAM,Uso da Memoria (%),86.60,Moderado
+2026-10-26 20:34:53,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco em uso (%),37.30,
+2026-10-26 20:34:53,7,pagamento,1,AquaTech Solutions,CPU,Porcentagem de Uso (%),23.10,
+2026-10-26 20:35:02,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco em uso (%),37.30,
+2026-10-26 20:35:02,7,pagamento,1,AquaTech Solutions,CPU,Porcentagem de Uso (%),31.80,
+2026-10-26 20:35:02,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco disponivel (%),62.70,
+2026-10-26 20:35:02,7,pagamento,1,AquaTech Solutions,Memoria RAM,Uso da Memoria (%),86.70,Moderado
+2026-10-26 20:35:33,7,pagamento,1,AquaTech Solutions,CPU,Porcentagem de Uso (%),20.20,
+2026-10-26 20:35:33,7,pagamento,1,AquaTech Solutions,Memoria RAM,Uso da Memoria (%),86.40,Moderado
+2026-10-26 20:35:33,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco disponivel (%),62.70,
+2026-10-26 20:35:33,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco em uso (%),37.30,
+2026-10-26 20:36:04,7,pagamento,1,AquaTech Solutions,CPU,Porcentagem de Uso (%),41.50,
+2026-10-26 20:36:04,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco disponivel (%),62.60,
+2026-10-26 20:36:04,7,pagamento,1,AquaTech Solutions,Memoria RAM,Uso da Memoria (%),86.60,Moderado
+2026-10-26 20:36:04,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco em uso (%),37.40,
+2026-10-26 20:36:35,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco disponivel (%),62.60,
+2026-10-26 20:36:35,7,pagamento,1,AquaTech Solutions,CPU,Porcentagem de Uso (%),29.70,
+2026-10-26 20:36:35,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco em uso (%),37.40,
+2026-10-26 20:36:35,7,pagamento,1,AquaTech Solutions,Memoria RAM,Uso da Memoria (%),85.30,Moderado
+2026-10-26 20:37:06,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco em uso (%),37.40,
+2026-10-26 20:37:06,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco disponivel (%),62.60,
+2026-10-26 20:37:06,7,pagamento,1,AquaTech Solutions,CPU,Porcentagem de Uso (%),34.00,
+2026-10-26 20:37:06,7,pagamento,1,AquaTech Solutions,Memoria RAM,Uso da Memoria (%),84.70,Moderado
+2026-10-26 20:37:37,7,pagamento,1,AquaTech Solutions,CPU,Porcentagem de Uso (%),28.40,
+2026-10-26 20:37:37,7,pagamento,1,AquaTech Solutions,Memoria RAM,Uso da Memoria (%),84.20,Moderado
+2026-10-26 20:37:37,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco disponivel (%),62.60,
+2026-10-26 20:37:37,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco em uso (%),37.40,
+2026-10-26 20:38:08,7,pagamento,1,AquaTech Solutions,Memoria RAM,Uso da Memoria (%),85.20,Moderado
+2026-10-26 20:38:08,7,pagamento,1,AquaTech Solutions,CPU,Porcentagem de Uso (%),39.20,
+2026-10-26 20:38:08,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco disponivel (%),62.60,
+2026-10-26 20:38:08,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco em uso (%),37.40,
+2026-10-26 20:38:39,7,pagamento,1,AquaTech Solutions,Memoria RAM,Uso da Memoria (%),85.10,Moderado
+2026-10-26 20:38:39,7,pagamento,1,AquaTech Solutions,CPU,Porcentagem de Uso (%),32.20,
+2026-10-26 20:38:39,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco disponivel (%),62.60,
+2026-10-26 20:38:39,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco em uso (%),37.40,
+2026-10-26 20:39:10,7,pagamento,1,AquaTech Solutions,Memoria RAM,Uso da Memoria (%),84.50,Moderado
+2026-10-26 20:39:10,7,pagamento,1,AquaTech Solutions,CPU,Porcentagem de Uso (%),20.00,
+2026-10-26 20:39:10,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco disponivel (%),62.60,
+2026-10-26 20:39:10,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco em uso (%),37.40,
+2026-10-26 20:39:41,7,pagamento,1,AquaTech Solutions,Memoria RAM,Uso da Memoria (%),84.60,Moderado
+2026-10-26 20:39:41,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco disponivel (%),62.60,
+2026-10-26 20:39:41,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco em uso (%),37.40,
+2026-10-26 20:39:41,7,pagamento,1,AquaTech Solutions,CPU,Porcentagem de Uso (%),20.50,
+2026-10-26 20:40:12,7,pagamento,1,AquaTech Solutions,Memoria RAM,Uso da Memoria (%),85.10,Moderado
+2026-10-26 20:40:12,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco disponivel (%),62.60,
+2026-10-26 20:40:12,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco em uso (%),37.40,
+2026-10-26 20:40:12,7,pagamento,1,AquaTech Solutions,CPU,Porcentagem de Uso (%),21.40,
+2026-10-26 20:40:43,7,pagamento,1,AquaTech Solutions,CPU,Porcentagem de Uso (%),62.40,
+2026-10-26 20:40:43,7,pagamento,1,AquaTech Solutions,Memoria RAM,Uso da Memoria (%),84.80,Moderado
+2026-10-26 20:40:44,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco disponivel (%),62.60,
+2026-10-26 20:40:44,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco em uso (%),37.40,
+2026-10-26 20:41:15,7,pagamento,1,AquaTech Solutions,Memoria RAM,Uso da Memoria (%),85.40,Moderado
+2026-10-26 20:41:15,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco disponivel (%),62.60,
+2026-10-26 20:41:15,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco em uso (%),37.40,
+2026-10-26 20:41:15,7,pagamento,1,AquaTech Solutions,CPU,Porcentagem de Uso (%),22.60,
+2026-10-26 20:41:46,7,pagamento,1,AquaTech Solutions,Memoria RAM,Uso da Memoria (%),84.70,Moderado
+2026-10-26 20:41:46,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco disponivel (%),62.60,
+2026-10-26 20:41:46,7,pagamento,1,AquaTech Solutions,Disco Rigido,Espaco em uso (%),37.40,
+2026-10-26 20:41:46,7,pagamento,1,AquaTech Solutions,CPU,Porcentagem de Uso (%),27.10,
