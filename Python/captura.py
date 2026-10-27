@@ -207,6 +207,26 @@ def definir_limite(id_registro, tipo_metrica, valor):
 
         print(f"[{categoria}] {descricao} | Valor: {valor}")
 
+def garantir_configuracoes(id_servidor):
+    # Cria em config o vínculo servidor <-> componente, se ainda não existir
+    for nome_componente in ["CPU", "Memoria RAM", "Disco Rigido"]:
+
+        if buscar_configuracao(id_servidor, nome_componente) is None: # busca config para cada componente
+            sql = """
+                INSERT INTO config (fk_componente, fk_servidor)
+                SELECT id, %s
+                FROM componente
+                WHERE nome = %s
+            """ # descobre o id do componente pelo nome
+
+            cursor.execute(sql, (id_servidor, nome_componente)) # executa a querry
+
+            if cursor.rowcount == 0:
+                print(f"Componente '{nome_componente}' não existe na tabela componente.")
+            else:
+                print(f"Configuração criada: {nome_componente} (servidor {id_servidor})")
+
+    conexao.commit()
 
 def inserir_dados(id_servidor, dados):
     (
@@ -306,6 +326,8 @@ try:
         print(f"Nenhum servidor encontrado no banco com o IP {ip}.")
         sys.exit(1)
 
+    garantir_configuracoes(id_servidor)
+    
     print(f"IP da máquina: {ip} | ID do servidor: {id_servidor}")
 
     while True:
