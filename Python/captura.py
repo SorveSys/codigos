@@ -35,7 +35,7 @@ def buscar_ip():
     # 2. Fallback via Socket caso rode fora do Docker
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
-        s.connect(("8.8.8.8", 80))
+        s.connect(("98.89.118.4", 80))
         ip = s.getsockname()[0]
         return ip
     except OSError:
