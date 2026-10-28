@@ -27,17 +27,21 @@ if conexao.is_connected():
 
 
 def buscar_ip():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # ponto de comunicação de rede
-    # AF_INET: Ipv4 - SOCK_DGRAM: usa protocolo UDP 
+    # 1. Tenta pegar o IP real da máquina repassado pelo Docker
+    ip_env = os.environ.get('HOST_IP')
+    if ip_env:
+        return ip_env
+
+    # 2. Fallback via Socket caso rode fora do Docker
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
-        s.connect(("8.8.8.8", 80))  # UDP: não envia nada de verdade
-        # destino: "8.8.8.8" - porta: 80
+        s.connect(("8.8.8.8", 80))
         ip = s.getsockname()[0]
         return ip
-    except OSError: # se não conseguir obter o ip retorna none
+    except OSError:
         return None
     finally:
-        s.close() # fecha a conexão socket
+        s.close()
 
 
 def confirmar_servidor(ip):
